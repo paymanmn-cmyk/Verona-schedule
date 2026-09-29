@@ -446,7 +446,7 @@ def main(page: ft.Page):
         ft.Container(
             content=ft.Column([
                 wheels_row,
-                ft.Container(content=date_title, alignment=ft.Alignment(0, 0)),
+                ft.Container(content=date_title, alignment=ft.alignment.center),
                 ft.Row([btn_prev, btn_today, btn_next], alignment="center", spacing=8),
             ], spacing=6),
             bgcolor="#e3f2fd",
