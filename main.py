@@ -48,6 +48,12 @@ MONTH_NAMES = [
 YEAR_LIST = list(range(1400, 1411))
 
 
+def safe_border(width, color):
+    """ایجاد حاشیه سازگار با تمام نسخه‌های Flet و وب"""
+    side = ft.BorderSide(width, color)
+    return ft.Border(left=side, top=side, right=side, bottom=side)
+
+
 def get_days_in_jalali_month(year, month):
     if month <= 6:
         return 31
@@ -97,12 +103,12 @@ def main(page: ft.Page):
 
     date_title = ft.Text(size=16, weight="bold", color="#0d47a1")
     slots_column = ft.Column(spacing=6)
-    unit_buttons_row = ft.Row(alignment="center", spacing=6)
+    unit_buttons_row = ft.Row(alignment=ft.MainAxisAlignment.CENTER, spacing=6)
 
-    # کانتینرهای نگهدارنده چرخ‌ها برای بازسازی بدون باگ
-    day_box_content = ft.Container(alignment=ft.Alignment(0, 0))
-    month_box_content = ft.Container(alignment=ft.Alignment(0, 0))
-    year_box_content = ft.Container(alignment=ft.Alignment(0, 0))
+    # کانتینرهای نگهدارنده چرخ‌ها
+    day_box_content = ft.Container(alignment=ft.alignment.center)
+    month_box_content = ft.Container(alignment=ft.alignment.center)
+    year_box_content = ft.Container(alignment=ft.alignment.center)
 
     def make_wheel_box(title, inner_container, width=90):
         return ft.Container(
@@ -115,26 +121,26 @@ def main(page: ft.Page):
                         width=width,
                         border_radius=15,
                         bgcolor="#ffffff",
-                        alignment=ft.Alignment(0, 0),
+                        alignment=ft.alignment.center,
                         shadow=ft.BoxShadow(
                             spread_radius=1,
                             blur_radius=6,
                             color="#20000000",
                             offset=ft.Offset(0, 2),
                         ),
-                        border=ft.border.all(1.2, "#bbdefb"),
+                        border=safe_border(1.2, "#bbdefb"),
                     ),
                 ],
-                horizontal_alignment="center",
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 spacing=3,
             ),
-            alignment=ft.Alignment(0, 0),
+            alignment=ft.alignment.center,
         )
 
     def make_picker_item(text):
         return ft.Container(
             content=ft.Text(text, size=14, weight="bold", color="#1a237e"),
-            alignment=ft.Alignment(0, 0),
+            alignment=ft.alignment.center,
         )
 
     def on_day_change(e):
@@ -223,7 +229,6 @@ def main(page: ft.Page):
             print("خطا در تنظیم تاریخ:", exc)
 
     def sync_pickers_with_date():
-        """همگام‌سازی کامل چرخه‌ها با تاریخ جاری با بازسازی کنترلرها"""
         nonlocal is_syncing, selected_year, selected_month, selected_day
         is_syncing = True
         selected_year = current_date.year
@@ -241,7 +246,7 @@ def main(page: ft.Page):
         bgcolor="#1565c0",
         padding=8,
         border_radius=10,
-        alignment=ft.Alignment(0, 0),
+        alignment=ft.alignment.center,
         width=125,
     )
     pool_tab_btn = ft.Container(
@@ -249,7 +254,7 @@ def main(page: ft.Page):
         bgcolor="#e0e0e0",
         padding=8,
         border_radius=10,
-        alignment=ft.Alignment(0, 0),
+        alignment=ft.alignment.center,
         width=125,
     )
 
@@ -281,20 +286,20 @@ def main(page: ft.Page):
                             ft.Text(f"⏰ {time_str}", size=13, color="#424242", weight="w500"),
                         ],
                         spacing=10,
-                        vertical_alignment="center",
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
                     ),
                     ft.Container(
                         content=ft.Text(badge_text, color="#ffffff", size=12, weight="bold"),
                         bgcolor=badge_bg,
-                        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
+                        padding=ft.Padding(10, 5, 10, 5),
                         border_radius=12,
                     )
                 ],
-                alignment="spaceBetween",
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             ),
             bgcolor=bg_color,
-            padding=ft.Padding(left=12, right=12, top=8, bottom=8),
-            border=ft.border.all(1.2, border_color),
+            padding=ft.Padding(12, 8, 12, 8),
+            border=safe_border(1.2, border_color),
             border_radius=8,
         )
 
@@ -316,8 +321,8 @@ def main(page: ft.Page):
                     color="#ffffff" if is_active else "#0d47a1",
                 ),
                 bgcolor="#1976d2" if is_active else "#bbdefb",
-                border=ft.border.all(1.2, "#1565c0"),
-                padding=ft.Padding(left=10, right=10, top=5, bottom=5),
+                border=safe_border(1.2, "#1565c0"),
+                padding=ft.Padding(10, 5, 10, 5),
                 border_radius=8,
                 data=u,
                 on_click=on_unit_click,
@@ -366,7 +371,7 @@ def main(page: ft.Page):
                         bgcolor="#ffebee",
                         padding=8,
                         border_radius=8,
-                        border=ft.border.all(1, "#ef9a9a"),
+                        border=safe_border(1, "#ef9a9a"),
                     )
                 )
                 for slot in POOL_SLOTS:
@@ -401,22 +406,22 @@ def main(page: ft.Page):
     btn_prev = ft.Container(
         content=ft.Text("⬅️ روز قبل", size=12, weight="bold", color="#ffffff"),
         bgcolor="#1e88e5",
-        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
+        padding=ft.Padding(10, 5, 10, 5),
         border_radius=8,
         on_click=lambda e: change_date(-1),
     )
     btn_today = ft.Container(
         content=ft.Text("امروز", size=12, weight="bold", color="#0d47a1"),
         bgcolor="#bbdefb",
-        border=ft.border.all(1, "#1976d2"),
-        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
+        border=safe_border(1, "#1976d2"),
+        padding=ft.Padding(10, 5, 10, 5),
         border_radius=8,
         on_click=go_today,
     )
     btn_next = ft.Container(
         content=ft.Text("روز بعد ➡️", size=12, weight="bold", color="#ffffff"),
         bgcolor="#1e88e5",
-        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
+        padding=ft.Padding(10, 5, 10, 5),
         border_radius=8,
         on_click=lambda e: change_date(1),
     )
@@ -430,14 +435,14 @@ def main(page: ft.Page):
             make_wheel_box("ماه", month_box_content, width=120),
             make_wheel_box("سال", year_box_content, width=95),
         ],
-        alignment="center",
+        alignment=ft.MainAxisAlignment.CENTER,
         spacing=8,
     )
 
     page.add(
         ft.Row(
             [ft.Text("🏢 برنامه مشاعات ورونا", size=20, weight="bold", color="#0d47a1")],
-            alignment="center",
+            alignment=ft.MainAxisAlignment.CENTER,
         ),
         ft.Divider(height=1, thickness=1),
         ft.Text("واحد خود را انتخاب کنید:", size=12, weight="bold", color="#37474f"),
@@ -447,20 +452,21 @@ def main(page: ft.Page):
             content=ft.Column([
                 wheels_row,
                 ft.Container(content=date_title, alignment=ft.alignment.center),
-                ft.Row([btn_prev, btn_today, btn_next], alignment="center", spacing=8),
+                ft.Row([btn_prev, btn_today, btn_next], alignment=ft.MainAxisAlignment.CENTER, spacing=8),
             ], spacing=6),
             bgcolor="#e3f2fd",
             padding=10,
             border_radius=12,
-            border=ft.border.all(1, "#90caf9"),
+            border=safe_border(1, "#90caf9"),
         ),
         ft.Container(height=6),
-        ft.Row([roof_tab_btn, pool_tab_btn], alignment="center", spacing=8),
+        ft.Row([roof_tab_btn, pool_tab_btn], alignment=ft.MainAxisAlignment.CENTER, spacing=8),
         ft.Container(height=4),
         slots_column,
     )
 
     update_view(rebuild_pickers=False)
+
 
 if __name__ == "__main__":
     try:
@@ -472,4 +478,3 @@ if __name__ == "__main__":
             import flet.app as flet_app
 
             ft.app(target=main)
-   
