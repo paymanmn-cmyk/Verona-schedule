@@ -409,14 +409,14 @@ def main(page: ft.Page):
         content=ft.Text("امروز", size=12, weight="bold", color="#0d47a1"),
         bgcolor="#bbdefb",
         border=ft.border.all(1, "#1976d2"),
-        padding=ft.padding.symmetric(horizontal=12, vertical=6),
+        padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
         border_radius=8,
         on_click=go_today,
     )
     btn_next = ft.Container(
         content=ft.Text("روز بعد ➡️", size=12, weight="bold", color="#ffffff"),
         bgcolor="#1e88e5",
-        padding=ft.padding.symmetric(horizontal=10, vertical=6),
+        padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
         border_radius=8,
         on_click=lambda e: change_date(1),
     )
