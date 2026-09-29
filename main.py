@@ -471,5 +471,5 @@ if __name__ == "__main__":
         except AttributeError:
             import flet.app as flet_app
 
-            flet_app.app(target=main)
+            ft.app(target=main)
    
