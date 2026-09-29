@@ -7,8 +7,8 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  pages: GAPGPTMASKTOKEN4jpcquneglmX0X
+  id-token: GAPGPTMASKTOKEN4jpcquneglmX1X
 
 jobs:
   deploy:
@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flet==0.23.2 jdatetime
+          pip install "flet==0.21.2" jdatetime
 
       - name: Build Web App
         run: |
