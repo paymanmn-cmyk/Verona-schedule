@@ -7,8 +7,8 @@ on:
 
 permissions:
   contents: read
-  pages: GAPGPTMASKTOKENjeo7y25eg8X0X
-  id-token: GAPGPTMASKTOKENjeo7y25eg8X1X
+  pages: GAPGPTMASKTOKEN3yp5wv64yp5X0X
+  id-token: GAPGPTMASKTOKEN3yp5wv64yp5X1X
 
 jobs:
   deploy:
@@ -28,11 +28,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flet==0.23.2 jdatetime
+          pip install "flet==0.23.2" jdatetime
 
       - name: Build Web App
         run: |
-          flet build web --base-url /${{ github.event.repository.name }}/
+          flet publish main.py --package-name "Verona Schedule" --base-url /${{ github.event.repository.name }}/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -40,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build/web'
+          path: 'dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
