@@ -7,8 +7,8 @@ on:
 
 permissions:
   contents: read
-  pages: GAPGPTMASKTOKENduh0045o5m6X0X
-  id-token: GAPGPTMASKTOKENduh0045o5m6X1X
+  pages: GAPGPTMASKTOKENjeo7y25eg8X0X
+  id-token: GAPGPTMASKTOKENjeo7y25eg8X1X
 
 jobs:
   deploy:
