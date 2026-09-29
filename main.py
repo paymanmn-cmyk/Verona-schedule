@@ -455,6 +455,11 @@ def main(page: ft.Page):
             border=ft.border.all(1, "#90caf9"),
         ),
         ft.Container(height=6),
+        ft.Row([roof_tab_btn, pool_tab_btn], alignment="center", spacing=8),
+        ft.Container(height=4),
+        slots_column,
+    )
+
     update_view(rebuild_pickers=False)
 
 if __name__ == "__main__":
@@ -465,5 +470,6 @@ if __name__ == "__main__":
             ft.app(target=main)
         except AttributeError:
             import flet.app as flet_app
-            flet_app.app(target=main)
 
+            flet_app.app(target=main)
+   
