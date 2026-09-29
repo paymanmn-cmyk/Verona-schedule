@@ -100,9 +100,9 @@ def main(page: ft.Page):
     unit_buttons_row = ft.Row(alignment="center", spacing=6)
 
     # کانتینرهای نگهدارنده چرخ‌ها برای بازسازی بدون باگ
-    day_box_content = ft.Container(alignment=ft.alignment.center)
-    month_box_content = ft.Container(alignment=ft.alignment.center)
-    year_box_content = ft.Container(alignment=ft.alignment.center)
+    day_box_content = ft.Container(alignment=ft.ft.Alignment(0, 0))
+    month_box_content = ft.Container(alignment=ft.ft.Alignment(0, 0))
+    year_box_content = ft.Container(alignment=ft.ft.Alignment(0, 0))
 
     def make_wheel_box(title, inner_container, width=90):
         return ft.Container(
@@ -115,7 +115,7 @@ def main(page: ft.Page):
                         width=width,
                         border_radius=15,
                         bgcolor="#ffffff",
-                        alignment=ft.alignment.center,
+                        alignment=ft.ft.Alignment(0, 0),
                         shadow=ft.BoxShadow(
                             spread_radius=1,
                             blur_radius=6,
@@ -128,13 +128,13 @@ def main(page: ft.Page):
                 horizontal_alignment="center",
                 spacing=3,
             ),
-            alignment=ft.alignment.center,
+            alignment=ft.ft.Alignment(0, 0),
         )
 
     def make_picker_item(text):
         return ft.Container(
             content=ft.Text(text, size=14, weight="bold", color="#1a237e"),
-            alignment=ft.alignment.center,
+            alignment=ft.ft.Alignment(0, 0),
         )
 
     def on_day_change(e):
@@ -241,7 +241,7 @@ def main(page: ft.Page):
         bgcolor="#1565c0",
         padding=8,
         border_radius=10,
-        alignment=ft.alignment.center,
+        alignment=ft.ft.Alignment(0, 0),
         width=125,
     )
     pool_tab_btn = ft.Container(
@@ -249,7 +249,7 @@ def main(page: ft.Page):
         bgcolor="#e0e0e0",
         padding=8,
         border_radius=10,
-        alignment=ft.alignment.center,
+        alignment=ft.ft.Alignment(0, 0),
         width=125,
     )
 
@@ -446,7 +446,7 @@ def main(page: ft.Page):
         ft.Container(
             content=ft.Column([
                 wheels_row,
-                ft.Container(content=date_title, alignment=ft.alignment.center),
+                ft.Container(content=date_title, alignment=ft.ft.Alignment(0, 0)),
                 ft.Row([btn_prev, btn_today, btn_next], alignment="center", spacing=8),
             ], spacing=6),
             bgcolor="#e3f2fd",
