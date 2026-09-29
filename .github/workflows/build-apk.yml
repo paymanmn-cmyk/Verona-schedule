@@ -29,19 +29,26 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          cache: true
 
-      - name: Install Flet and Dependencies
+      - name: Accept Android Licenses
         run: |
-          pip install --upgrade pip
-          pip install flet
-          pip install -r requirements.txt
+          yes | flutter doctor --android-licenses || true
+          flutter doctor
 
-      - name: Build APK with Flet
+      - name: Install Python Dependencies
         run: |
-          flet build apk --project "Verona Schedule" --product "Verona"
+          python -m pip install --upgrade pip
+          pip install "flet[all]"
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Build APK
+        run: |
+          flet build apk --project "Verona"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Verona-Schedule-APK
           path: build/apk/*.apk
+          if-no-files-found: warn
