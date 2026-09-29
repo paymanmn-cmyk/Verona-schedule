@@ -463,5 +463,13 @@ def main(page: ft.Page):
     update_view(rebuild_pickers=False)
 
 
-if __name__ == "__main__":
-    ft.app(target=main)
+ if __name__ == "__main__":
+       try:
+           ft.run(main)
+       except AttributeError:
+           try:
+               ft.app(target=main)
+           except AttributeError:
+               import flet.app as flet_app
+
+               flet_app.app(target=main)
