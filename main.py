@@ -100,9 +100,9 @@ def main(page: ft.Page):
     unit_buttons_row = ft.Row(alignment="center", spacing=6)
 
     # کانتینرهای نگهدارنده چرخ‌ها برای بازسازی بدون باگ
-    day_box_content = ft.Container(alignment=ft.ft.Alignment(0, 0))
-    month_box_content = ft.Container(alignment=ft.ft.Alignment(0, 0))
-    year_box_content = ft.Container(alignment=ft.ft.Alignment(0, 0))
+    day_box_content = ft.Container(alignment=ft.Alignment(0, 0))
+    month_box_content = ft.Container(alignment=ft.Alignment(0, 0))
+    year_box_content = ft.Container(alignment=ft.Alignment(0, 0))
 
     def make_wheel_box(title, inner_container, width=90):
         return ft.Container(
@@ -115,7 +115,7 @@ def main(page: ft.Page):
                         width=width,
                         border_radius=15,
                         bgcolor="#ffffff",
-                        alignment=ft.ft.Alignment(0, 0),
+                        alignment=ft.Alignment(0, 0),
                         shadow=ft.BoxShadow(
                             spread_radius=1,
                             blur_radius=6,
@@ -134,7 +134,7 @@ def main(page: ft.Page):
     def make_picker_item(text):
         return ft.Container(
             content=ft.Text(text, size=14, weight="bold", color="#1a237e"),
-            alignment=ft.ft.Alignment(0, 0),
+            alignment=ft.Alignment(0, 0),
         )
 
     def on_day_change(e):
@@ -241,7 +241,7 @@ def main(page: ft.Page):
         bgcolor="#1565c0",
         padding=8,
         border_radius=10,
-        alignment=ft.ft.Alignment(0, 0),
+        alignment=ft.Alignment(0, 0),
         width=125,
     )
     pool_tab_btn = ft.Container(
@@ -249,7 +249,7 @@ def main(page: ft.Page):
         bgcolor="#e0e0e0",
         padding=8,
         border_radius=10,
-        alignment=ft.ft.Alignment(0, 0),
+        alignment=ft.Alignment(0, 0),
         width=125,
     )
 
