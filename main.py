@@ -128,7 +128,7 @@ def main(page: ft.Page):
                 horizontal_alignment="center",
                 spacing=3,
             ),
-            alignment=ft.ft.Alignment(0, 0),
+            alignment=ft.Alignment(0, 0),
         )
 
     def make_picker_item(text):
