@@ -48,10 +48,22 @@ MONTH_NAMES = [
 YEAR_LIST = list(range(1400, 1411))
 
 
+def get_center_align():
+    try:
+        return ft.alignment.center
+    except Exception:
+        try:
+            return ft.Alignment(0, 0)
+        except Exception:
+            return None
+
+
 def safe_border(width, color):
-    """ایجاد حاشیه سازگار با تمام نسخه‌های Flet و وب"""
-    side = ft.BorderSide(width, color)
-    return ft.Border(left=side, top=side, right=side, bottom=side)
+    try:
+        side = ft.BorderSide(width, color)
+        return ft.Border(left=side, top=side, right=side, bottom=side)
+    except Exception:
+        return None
 
 
 def get_days_in_jalali_month(year, month):
@@ -91,6 +103,8 @@ def main(page: ft.Page):
     page.window_height = 800
     page.rtl = True
 
+    center_aln = get_center_align()
+
     current_date = jdatetime.date.today()
     selected_unit = 1
     current_tab = "roof"
@@ -103,12 +117,11 @@ def main(page: ft.Page):
 
     date_title = ft.Text(size=16, weight="bold", color="#0d47a1")
     slots_column = ft.Column(spacing=6)
-    unit_buttons_row = ft.Row(alignment=ft.MainAxisAlignment.CENTER, spacing=6)
+    unit_buttons_row = ft.Row(alignment="center", spacing=6)
 
-    # کانتینرهای نگهدارنده چرخ‌ها
-    day_box_content = ft.Container(alignment=ft.alignment.center)
-    month_box_content = ft.Container(alignment=ft.alignment.center)
-    year_box_content = ft.Container(alignment=ft.alignment.center)
+    day_box_content = ft.Container(alignment=center_aln)
+    month_box_content = ft.Container(alignment=center_aln)
+    year_box_content = ft.Container(alignment=center_aln)
 
     def make_wheel_box(title, inner_container, width=90):
         return ft.Container(
@@ -121,7 +134,7 @@ def main(page: ft.Page):
                         width=width,
                         border_radius=15,
                         bgcolor="#ffffff",
-                        alignment=ft.alignment.center,
+                        alignment=center_aln,
                         shadow=ft.BoxShadow(
                             spread_radius=1,
                             blur_radius=6,
@@ -131,16 +144,16 @@ def main(page: ft.Page):
                         border=safe_border(1.2, "#bbdefb"),
                     ),
                 ],
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                horizontal_alignment="center",
                 spacing=3,
             ),
-            alignment=ft.alignment.center,
+            alignment=center_aln,
         )
 
     def make_picker_item(text):
         return ft.Container(
             content=ft.Text(text, size=14, weight="bold", color="#1a237e"),
-            alignment=ft.alignment.center,
+            alignment=center_aln,
         )
 
     def on_day_change(e):
@@ -246,7 +259,7 @@ def main(page: ft.Page):
         bgcolor="#1565c0",
         padding=8,
         border_radius=10,
-        alignment=ft.alignment.center,
+        alignment=center_aln,
         width=125,
     )
     pool_tab_btn = ft.Container(
@@ -254,7 +267,7 @@ def main(page: ft.Page):
         bgcolor="#e0e0e0",
         padding=8,
         border_radius=10,
-        alignment=ft.alignment.center,
+        alignment=center_aln,
         width=125,
     )
 
@@ -286,7 +299,7 @@ def main(page: ft.Page):
                             ft.Text(f"⏰ {time_str}", size=13, color="#424242", weight="w500"),
                         ],
                         spacing=10,
-                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                        vertical_alignment="center",
                     ),
                     ft.Container(
                         content=ft.Text(badge_text, color="#ffffff", size=12, weight="bold"),
@@ -295,7 +308,7 @@ def main(page: ft.Page):
                         border_radius=12,
                     )
                 ],
-                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                alignment="spaceBetween",
             ),
             bgcolor=bg_color,
             padding=ft.Padding(12, 8, 12, 8),
@@ -435,14 +448,14 @@ def main(page: ft.Page):
             make_wheel_box("ماه", month_box_content, width=120),
             make_wheel_box("سال", year_box_content, width=95),
         ],
-        alignment=ft.MainAxisAlignment.CENTER,
+        alignment="center",
         spacing=8,
     )
 
     page.add(
         ft.Row(
             [ft.Text("🏢 برنامه مشاعات ورونا", size=20, weight="bold", color="#0d47a1")],
-            alignment=ft.MainAxisAlignment.CENTER,
+            alignment="center",
         ),
         ft.Divider(height=1, thickness=1),
         ft.Text("واحد خود را انتخاب کنید:", size=12, weight="bold", color="#37474f"),
@@ -451,8 +464,8 @@ def main(page: ft.Page):
         ft.Container(
             content=ft.Column([
                 wheels_row,
-                ft.Container(content=date_title, alignment=ft.alignment.center),
-                ft.Row([btn_prev, btn_today, btn_next], alignment=ft.MainAxisAlignment.CENTER, spacing=8),
+                ft.Container(content=date_title, alignment=center_aln),
+                ft.Row([btn_prev, btn_today, btn_next], alignment="center", spacing=8),
             ], spacing=6),
             bgcolor="#e3f2fd",
             padding=10,
@@ -460,7 +473,7 @@ def main(page: ft.Page):
             border=safe_border(1, "#90caf9"),
         ),
         ft.Container(height=6),
-        ft.Row([roof_tab_btn, pool_tab_btn], alignment=ft.MainAxisAlignment.CENTER, spacing=8),
+        ft.Row([roof_tab_btn, pool_tab_btn], alignment="center", spacing=8),
         ft.Container(height=4),
         slots_column,
     )
