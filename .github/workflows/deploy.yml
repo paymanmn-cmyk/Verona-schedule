@@ -7,8 +7,8 @@ on:
 
 permissions:
   contents: read
-  pages: GAPGPTMASKTOKENrygsy08spvoX0X
-  id-token: GAPGPTMASKTOKENrygsy08spvoX1X
+  pages: GAPGPTMASKTOKENxqtemdajggcX0X
+  id-token: GAPGPTMASKTOKENxqtemdajggcX1X
 
 concurrency:
   group: "pages"
@@ -37,11 +37,6 @@ jobs:
       - name: Build Web App
         run: |
           flet publish main.py --base-url /Verona-schedule/
-
-      - name: Fix Pyodide package
-        run: |
-          # اصلاح تداخل نسخه flet در مرورگر
-          sed -i 's/flet-pyodide/flet/g' dist/index.html || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
