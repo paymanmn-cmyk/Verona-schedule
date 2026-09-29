@@ -286,14 +286,14 @@ def main(page: ft.Page):
                     ft.Container(
                         content=ft.Text(badge_text, color="#ffffff", size=12, weight="bold"),
                         bgcolor=badge_bg,
-                        padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
+                        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
                         border_radius=12,
                     )
                 ],
                 alignment="spaceBetween",
             ),
             bgcolor=bg_color,
-            padding=ft.padding.only(left=12, right=12, top=8, bottom=8),
+            padding=ft.Padding(left=12, right=12, top=8, bottom=8),
             border=ft.border.all(1.2, border_color),
             border_radius=8,
         )
@@ -317,7 +317,7 @@ def main(page: ft.Page):
                 ),
                 bgcolor="#1976d2" if is_active else "#bbdefb",
                 border=ft.border.all(1.2, "#1565c0"),
-                padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
+                padding=ft.Padding(left=10, right=10, top=5, bottom=5),
                 border_radius=8,
                 data=u,
                 on_click=on_unit_click,
@@ -401,7 +401,7 @@ def main(page: ft.Page):
     btn_prev = ft.Container(
         content=ft.Text("⬅️ روز قبل", size=12, weight="bold", color="#ffffff"),
         bgcolor="#1e88e5",
-        padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
+        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
         border_radius=8,
         on_click=lambda e: change_date(-1),
     )
@@ -409,14 +409,14 @@ def main(page: ft.Page):
         content=ft.Text("امروز", size=12, weight="bold", color="#0d47a1"),
         bgcolor="#bbdefb",
         border=ft.border.all(1, "#1976d2"),
-        padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
+        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
         border_radius=8,
         on_click=go_today,
     )
     btn_next = ft.Container(
         content=ft.Text("روز بعد ➡️", size=12, weight="bold", color="#ffffff"),
         bgcolor="#1e88e5",
-        padding=ft.padding.only(left=10, right=10, top=5, bottom=5),
+        padding=ft.Padding(left=10, right=10, top=5, bottom=5),
         border_radius=8,
         on_click=lambda e: change_date(1),
     )
