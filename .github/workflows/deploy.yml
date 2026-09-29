@@ -7,11 +7,18 @@ on:
 
 permissions:
   contents: read
-  pages: GAPGPTMASKTOKENri34e56p3bfX0X
-  id-token: GAPGPTMASKTOKENri34e56p3bfX1X
+  pages: GAPGPTMASKTOKENrygsy08spvoX0X
+  id-token: GAPGPTMASKTOKENrygsy08spvoX1X
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,11 +32,19 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install "flet==0.23.2" jdatetime
+          pip install flet jdatetime
 
       - name: Build Web App
         run: |
-          flet publish main.py --pre --base-url /${{ github.event.repository.name }}/
+          flet publish main.py --base-url /Verona-schedule/
+
+      - name: Fix Pyodide package
+        run: |
+          # اصلاح تداخل نسخه flet در مرورگر
+          sed -i 's/flet-pyodide/flet/g' dist/index.html || true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
