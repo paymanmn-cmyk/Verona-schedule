@@ -7,8 +7,8 @@ on:
 
 permissions:
   contents: read
-  pages: GAPGPTMASKTOKEN6dwn1yjwk76X0X
-  id-token: GAPGPTMASKTOKEN6dwn1yjwk76X1X
+  pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
